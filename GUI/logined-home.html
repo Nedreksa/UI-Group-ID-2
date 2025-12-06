@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopigo - Welcome</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Home page additional styles */
+        .banner {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #3AAED8 0%, #52AA8A 50%, #388659 100%);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+        
+        .banner::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+        
+        .banner-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .banner-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .banner-content .btn {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .banner-content .btn:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .user-welcome {
+            background-color: rgba(82, 170, 138, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .recommendation {
+            background-color: rgba(58, 174, 216, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--highlight-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="logined-home.html" class="logo">
+                <img src="images/logo.png" alt="Shopigo Logo">
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="What are you looking for?">
+                <button type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </div>
+            <div class="nav-links">
+                <a href="logined-home.html" class="home-link">Home</a>
+                <a href="orders.html">
+                    <img src="images/account.png" alt="Orders">
+                    Orders
+                </a>
+                <a href="wishlist.html">
+                    <img src="images/favorited.png" alt="Favorites">
+                    Favorites
+                </a>
+                <a href="cart.html">
+                    <img src="images/trolley.png" alt="Cart">
+                    Cart
+                </a>
+                <a href="#" onclick="logout()">
+                    <img src="images/logout.png" alt="Logout">
+                </a>
+            </div>
+        </div>
+        <div class="header-container">
+            <nav class="categories-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Electronics</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Phones</a>
+                            <a href="category-electronics.html">Computers</a>
+                            <a href="category-electronics.html">Tablets</a>
+                            <a href="category-electronics.html">Headphones</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Fashion</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Women's Clothing</a>
+                            <a href="category-electronics.html">Men's Clothing</a>
+                            <a href="category-electronics.html">Children's Clothing</a>
+                            <a href="category-electronics.html">Shoes</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Books</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Fiction</a>
+                            <a href="category-electronics.html">Education</a>
+                            <a href="category-electronics.html">Children's Books</a>
+                            <a href="category-electronics.html">Academic</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Spor/Outdoor</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Sports Clothing</a>
+                            <a href="category-electronics.html">Sports Shoes</a>
+                            <a href="category-electronics.html">Fitness</a>
+                            <a href="category-electronics.html">Outdoor</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Pet Shop</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Pet Food</a>
+                            <a href="category-electronics.html">Pet Toys</a>
+                            <a href="category-electronics.html">Pet Accessories</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Health</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Vitamins</a>
+                            <a href="category-electronics.html">Medical Equipment</a>
+                            <a href="category-electronics.html">First Aid</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Home & Kitchen</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Furniture</a>
+                            <a href="category-electronics.html">Kitchen</a>
+                            <a href="category-electronics.html">Decoration</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Toys & Games</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Educational Toys</a>
+                            <a href="category-electronics.html">Board Games</a>
+                            <a href="category-electronics.html">Puzzles</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- User Welcome -->
+        <div class="user-welcome">
+            <div>
+                <h3>Welcome, <span class="user-name">User</span>!</h3>
+                <p>Last login: December 6, 2025, 20:15</p>
+            </div>
+            <div>
+                <a href="orders.html" class="btn btn-secondary">My Orders</a>
+            </div>
+        </div>
+
+        <!-- Personal Recommendations -->
+        <div class="recommendation">
+            <h3>Picked Just For You</h3>
+            <p>We've gathered products you might like based on your browsing history.</p>
+        </div>
+
+        <!-- Banner Area -->
+        <div class="banner">
+            <div class="banner-content">
+                <h2>New Season Sale</h2>
+                <p>Up to 50% off on all products!</p>
+                <a href="category-electronics.html" class="btn">Shop Now</a>
+            </div>
+        </div>
+
+        <!-- Featured Products -->
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Product+1" class="product-image" alt="Product 1">
+                <button class="favorite-btn">
+                    <img src="images/favorited.png" alt="Added to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Smartphone XYZ</h3>
+                    <div class="product-price">$799.99</div>
+                    <p>6.7" Screen, 128GB Storage, 48MP Camera</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="1">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Product+2" class="product-image" alt="Product 2">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Wireless Headphones</h3>
+                    <div class="product-price">$129.99</div>
+                    <p>Noise Cancellation, 30 Hours Battery Life</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="2">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Product+3" class="product-image" alt="Product 3">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Smart Watch Pro</h3>
+                    <div class="product-price">$249.99</div>
+                    <p>Heart Rate Monitor, GPS, Water Resistant</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="3">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Product+4" class="product-image" alt="Product 4">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Bluetooth Speaker</h3>
+                    <div class="product-price">$89.99</div>
+                    <p>Waterproof, 10 Hours Playback</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="4">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deals -->
+        <h2 class="section-title" style="margin-top: 40px;">Today's Deals</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Deal+1" class="product-image" alt="Deal 1">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Vacuum Cleaner</h3>
+                    <div class="product-price">$199.99 <span style="text-decoration: line-through; color: #999; font-size: 14px;">$259.99</span></div>
+                    <p>Powerful Suction, HEPA Filter</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="5">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Deal+2" class="product-image" alt="Deal 2">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Coffee Maker</h3>
+                    <div class="product-price">$99.99 <span style="text-decoration: line-through; color: #999; font-size: 14px;">$149.99</span></div>
+                    <p>Automatic, 1.5L Capacity</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="6">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Deal+3" class="product-image" alt="Deal 3">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Smart Home Hub</h3>
+                    <div class="product-price">$79.99 <span style="text-decoration: line-through; color: #999; font-size: 14px;">$119.99</span></div>
+                    <p>Voice Control, Mobile App</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="7">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://placehold.co/250x200?text=Deal+4" class="product-image" alt="Deal 4">
+                <button class="favorite-btn">
+                    <img src="images/favorite.png" alt="Add to Favorites">
+                </button>
+                <div class="product-info">
+                    <h3 class="product-title">Sport Shoes</h3>
+                    <div class="product-price">$59.99 <span style="text-decoration: line-through; color: #999; font-size: 14px;">$89.99</span></div>
+                    <p>Lightweight, Breathable Material</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-product-id="8">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Clothing</a></li>
+                        <li><a href="#">Home & Living</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shopigo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

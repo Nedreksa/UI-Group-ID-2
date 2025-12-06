@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Shopigo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="logined-home.html" class="logo">
+                <img src="images/logo.png" alt="Shopigo Logo">
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="What are you looking for?">
+                <button type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </div>
+            <div class="nav-links">
+                <a href="logined-home.html" class="home-link">Home</a>
+                <a href="orders.html">
+                    <img src="images/account.png" alt="Orders">
+                    Orders
+                </a>
+                <a href="wishlist.html">
+                    <img src="images/favorited.png" alt="Favorites">
+                    Favorites
+                </a>
+                <a href="cart.html">
+                    <img src="images/trolley.png" alt="Cart">
+                    Cart
+                </a>
+                <a href="#" onclick="logout()">
+                    <img src="images/logout.png" alt="Logout">
+                </a>
+            </div>
+        </div>
+        <div class="header-container">
+            <nav class="categories-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Electronics</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Phones</a>
+                            <a href="category-electronics.html">Computers</a>
+                            <a href="category-electronics.html">Tablets</a>
+                            <a href="category-electronics.html">Headphones</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Fashion</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Women's Clothing</a>
+                            <a href="category-electronics.html">Men's Clothing</a>
+                            <a href="category-electronics.html">Children's Clothing</a>
+                            <a href="category-electronics.html">Shoes</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Books</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Fiction</a>
+                            <a href="category-electronics.html">Education</a>
+                            <a href="category-electronics.html">Children's Books</a>
+                            <a href="category-electronics.html">Academic</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Spor/Outdoor</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Sports Clothing</a>
+                            <a href="category-electronics.html">Sports Shoes</a>
+                            <a href="category-electronics.html">Fitness</a>
+                            <a href="category-electronics.html">Outdoor</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Pet Shop</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Pet Food</a>
+                            <a href="category-electronics.html">Pet Toys</a>
+                            <a href="category-electronics.html">Pet Accessories</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Health</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Vitamins</a>
+                            <a href="category-electronics.html">Medical Equipment</a>
+                            <a href="category-electronics.html">First Aid</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Home & Kitchen</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Furniture</a>
+                            <a href="category-electronics.html">Kitchen</a>
+                            <a href="category-electronics.html">Decoration</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Toys & Games</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Educational Toys</a>
+                            <a href="category-electronics.html">Board Games</a>
+                            <a href="category-electronics.html">Puzzles</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb -->
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="logined-home.html">Home</a> > 
+            <a href="#">Electronics</a> > 
+            <a href="#">Smartphones</a> > 
+            <span>Smartphone XYZ</span>
+        </div>
+
+        <div class="product-container">
+            <!-- Product Gallery -->
+            <div class="product-gallery">
+                <img src="https://placehold.co/600x400?text=Product+Main+Image" class="main-image" alt="Smartphone XYZ">
+                <div class="thumbnail-container">
+                    <img src="https://placehold.co/80x80?text=1" class="thumbnail" alt="Product Image 1">
+                    <img src="https://placehold.co/80x80?text=2" class="thumbnail" alt="Product Image 2">
+                    <img src="https://placehold.co/80x80?text=3" class="thumbnail" alt="Product Image 3">
+                    <img src="https://placehold.co/80x80?text=4" class="thumbnail" alt="Product Image 4">
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-details">
+                <h1 class="product-title-large">Smartphone XYZ</h1>
+                <div class="product-price-large">$799.99</div>
+                
+                <div class="product-description">
+                    <p>This high-performance smartphone features powerful specs and a sleek design. The 6.7" Super AMOLED display, high-resolution camera system, and long battery life make it ideal for everyday use.</p>
+                </div>
+                
+                <div class="quantity-selector">
+                    <span>Quantity:</span>
+                    <button data-action="decrease">-</button>
+                    <input type="number" value="1" min="1" max="10" class="quantity-input">
+                    <button data-action="increase">+</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary add-to-cart" data-product-id="1">Add to Cart</button>
+                    <button class="btn btn-secondary add-to-wishlist" data-product-id="1">Add to Wishlist</button>
+                </div>
+                
+                <div class="product-specs">
+                    <h3>Technical Specifications</h3>
+                    <ul class="specs-list">
+                        <li>
+                            <span class="spec-name">Screen Size</span>
+                            <span>6.7"</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Processor</span>
+                            <span>XYZ Octacore 2.8 GHz</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">RAM</span>
+                            <span>8 GB</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Storage</span>
+                            <span>128 GB</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Rear Camera</span>
+                            <span>48 MP + 12 MP + 8 MP</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Front Camera</span>
+                            <span>32 MP</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Battery Capacity</span>
+                            <span>5000 mAh</span>
+                        </li>
+                        <li>
+                            <span class="spec-name">Operating System</span>
+                            <span>Android 15</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Reviews - For logged in users -->
+        <div class="product-reviews">
+            <h2 class="section-title">Customer Reviews</h2>
+            
+            <div class="review">
+                <div class="review-header">
+                    <span class="review-author">John D.</span>
+                    <span class="review-date">November 24, 2025</span>
+                </div>
+                <div class="star-rating">★★★★★</div>
+                <p>Amazing phone, especially the camera quality is impressive. Battery life is longer than expected.</p>
+            </div>
+            
+            <div class="review">
+                <div class="review-header">
+                    <span class="review-author">Sarah K.</span>
+                    <span class="review-date">November 16, 2025</span>
+                </div>
+                <div class="star-rating">★★★★☆</div>
+                <p>Generally satisfied but it can get warm at times. Camera quality and display are excellent.</p>
+            </div>
+            
+            <div class="review">
+                <div class="review-header">
+                    <span class="review-author">Michael S.</span>
+                    <span class="review-date">November 10, 2025</span>
+                </div>
+                <div class="star-rating">★★★★★</div>
+                <p>Huge improvement from my old phone. Love the speed, camera and design.</p>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button class="btn btn-secondary">Write a Review</button>
+            </div>
+        </div>
+
+        <!-- Similar Products -->
+        <div class="related-products">
+            <h2 class="section-title">Similar Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://placehold.co/250x200?text=Similar+1" class="product-image" alt="Similar Product 1">
+                    <button class="favorite-btn">
+                        <img src="images/favorite.png" alt="Add to Favorites">
+                    </button>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone ABC</h3>
+                        <div class="product-price">$649.99</div>
+                        <p>6.5" Screen, 256GB Storage</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" data-product-id="10">Add to Cart</button>
+                            <button class="btn btn-secondary add-to-wishlist" data-product-id="10">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://placehold.co/250x200?text=Similar+2" class="product-image" alt="Similar Product 2">
+                    <button class="favorite-btn">
+                        <img src="images/favorite.png" alt="Add to Favorites">
+                    </button>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone DEF</h3>
+                        <div class="product-price">$829.99</div>
+                        <p>6.8" Screen, 512GB Storage</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" data-product-id="11">Add to Cart</button>
+                            <button class="btn btn-secondary add-to-wishlist" data-product-id="11">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://placehold.co/250x200?text=Similar+3" class="product-image" alt="Similar Product 3">
+                    <button class="favorite-btn">
+                        <img src="images/favorite.png" alt="Add to Favorites">
+                    </button>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone GHI</h3>
+                        <div class="product-price">$599.99</div>
+                        <p>6.4" Screen, 128GB Storage</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" data-product-id="12">Add to Cart</button>
+                            <button class="btn btn-secondary add-to-wishlist" data-product-id="12">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://placehold.co/250x200?text=Similar+4" class="product-image" alt="Similar Product 4">
+                    <button class="favorite-btn">
+                        <img src="images/favorite.png" alt="Add to Favorites">
+                    </button>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone JKL</h3>
+                        <div class="product-price">$759.99</div>
+                        <p>6.6" Screen, 256GB Storage</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" data-product-id="13">Add to Cart</button>
+                            <button class="btn btn-secondary add-to-wishlist" data-product-id="13">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Clothing</a></li>
+                        <li><a href="#">Home & Living</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shopigo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        // Thumbnail images click to change main image
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainImage = document.querySelector('.main-image');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    mainImage.src = this.src.replace('80x80', '600x400');
+                });
+            });
+            
+            // Quantity adjustment buttons
+            const quantityButtons = document.querySelectorAll('.quantity-selector button');
+            const quantityInput = document.querySelector('.quantity-input');
+            
+            quantityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    let currentValue = parseInt(quantityInput.value);
+                    
+                    if (action === 'increase') {
+                        currentValue++;
+                    } else if (action === 'decrease' && currentValue > 1) {
+                        currentValue--;
+                    }
+                    
+                    quantityInput.value = currentValue;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

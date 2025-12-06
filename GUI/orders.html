@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Shopigo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Orders page additional styles */
+        .orders-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .order-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        .order-id {
+            font-weight: bold;
+        }
+        
+        .order-date {
+            color: #777;
+        }
+        
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-delivered {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-shipped {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .status-processing {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .status-cancelled {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .order-details {
+            margin-bottom: 15px;
+        }
+        
+        .order-products {
+            margin-top: 15px;
+        }
+        
+        .order-product {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .product-image-small {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .product-info-small {
+            flex: 1;
+        }
+        
+        .product-title-small {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .product-price-small {
+            color: #e53935;
+        }
+        
+        .product-quantity {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .order-total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .order-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background-color: #1e88e5;
+            color: white;
+            border-color: #1e88e5;
+        }
+        
+        .empty-orders {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .empty-orders p {
+            margin-bottom: 20px;
+            color: #777;
+        }
+        
+        .tracking-info {
+            background-color: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="logined-home.html" class="logo">
+                <img src="images/logo.png" alt="Shopigo Logo">
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="What are you looking for?">
+                <button type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </div>
+            <div class="nav-links">
+                <a href="logined-home.html" class="home-link">Home</a>
+                <a href="orders.html">
+                    <img src="images/account.png" alt="Orders">
+                    Orders
+                </a>
+                <a href="wishlist.html">
+                    <img src="images/favorited.png" alt="Favorites">
+                    Favorites
+                </a>
+                <a href="cart.html">
+                    <img src="images/trolley.png" alt="Cart">
+                    Cart
+                </a>
+                <a href="#" onclick="logout()">
+                    <img src="images/logout.png" alt="Logout">
+                </a>
+            </div>
+        </div>
+        <div class="header-container">
+            <nav class="categories-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Electronics</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Phones</a>
+                            <a href="category-electronics.html">Computers</a>
+                            <a href="category-electronics.html">Tablets</a>
+                            <a href="category-electronics.html">Headphones</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Fashion</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Women's Clothing</a>
+                            <a href="category-electronics.html">Men's Clothing</a>
+                            <a href="category-electronics.html">Children's Clothing</a>
+                            <a href="category-electronics.html">Shoes</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Books</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Fiction</a>
+                            <a href="category-electronics.html">Education</a>
+                            <a href="category-electronics.html">Children's Books</a>
+                            <a href="category-electronics.html">Academic</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Spor/Outdoor</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Sports Clothing</a>
+                            <a href="category-electronics.html">Sports Shoes</a>
+                            <a href="category-electronics.html">Fitness</a>
+                            <a href="category-electronics.html">Outdoor</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Pet Shop</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Pet Food</a>
+                            <a href="category-electronics.html">Pet Toys</a>
+                            <a href="category-electronics.html">Pet Accessories</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Health</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Vitamins</a>
+                            <a href="category-electronics.html">Medical Equipment</a>
+                            <a href="category-electronics.html">First Aid</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Home & Kitchen</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Furniture</a>
+                            <a href="category-electronics.html">Kitchen</a>
+                            <a href="category-electronics.html">Decoration</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Toys & Games</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Educational Toys</a>
+                            <a href="category-electronics.html">Board Games</a>
+                            <a href="category-electronics.html">Puzzles</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">My Orders</h1>
+        
+        <!-- Order Filtering -->
+        <div class="order-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="delivered">Delivered</button>
+            <button class="filter-btn" data-filter="processing">Processing</button>
+            <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+        </div>
+        
+        <!-- Order List -->
+        <div class="orders-container">
+            <!-- Order 1 -->
+            <div class="order-item" data-status="delivered">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Order #12345</span>
+                        <span class="order-date">12/05/2025</span>
+                    </div>
+                    <div>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <p><strong>Delivery Address:</strong> 123 Example Street, Apt 4, New York, NY 10001</p>
+                    <p><strong>Payment Method:</strong> Credit Card</p>
+                </div>
+                
+                <div class="order-products">
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+1" class="product-image-small" alt="Smartphone XYZ">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Smartphone XYZ</h4>
+                            <div class="product-price-small">$799.99</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+2" class="product-image-small" alt="Phone Case">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Phone Case</h4>
+                            <div class="product-price-small">$14.99</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">
+                        Total: $814.98
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Order Details</button>
+                        <button class="btn btn-primary">Buy Again</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order 2 -->
+            <div class="order-item" data-status="shipped">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Order #12346</span>
+                        <span class="order-date">12/03/2025</span>
+                    </div>
+                    <div>
+                        <span class="order-status status-shipped">Shipped</span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <p><strong>Delivery Address:</strong> 123 Example Street, Apt 4, New York, NY 10001</p>
+                    <p><strong>Payment Method:</strong> Credit Card</p>
+                </div>
+                
+                <div class="tracking-info">
+                    <p><strong>Tracking Number:</strong> US123456789</p>
+                    <p><strong>Estimated Delivery:</strong> 12/07/2025</p>
+                </div>
+                
+                <div class="order-products">
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+3" class="product-image-small" alt="Bluetooth Speaker">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Bluetooth Speaker</h4>
+                            <div class="product-price-small">$89.99</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">
+                        Total: $89.99
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Track Package</button>
+                        <button class="btn btn-secondary">Order Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order 3 -->
+            <div class="order-item" data-status="processing">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Order #12347</span>
+                        <span class="order-date">12/01/2025</span>
+                    </div>
+                    <div>
+                        <span class="order-status status-processing">Processing</span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <p><strong>Delivery Address:</strong> 123 Example Street, Apt 4, New York, NY 10001</p>
+                    <p><strong>Payment Method:</strong> Bank Transfer</p>
+                </div>
+                
+                <div class="order-products">
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+4" class="product-image-small" alt="Wireless Headphones">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Wireless Headphones</h4>
+                            <div class="product-price-small">$129.99</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+5" class="product-image-small" alt="Charging Cable">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Charging Cable</h4>
+                            <div class="product-price-small">$12.99</div>
+                            <div class="product-quantity">Qty: 2</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">
+                        Total: $155.97
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Order Details</button>
+                        <button class="btn btn-danger">Cancel Order</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order 4 -->
+            <div class="order-item" data-status="cancelled">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Order #12348</span>
+                        <span class="order-date">11/25/2025</span>
+                    </div>
+                    <div>
+                        <span class="order-status status-cancelled">Cancelled</span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <p><strong>Delivery Address:</strong> 123 Example Street, Apt 4, New York, NY 10001</p>
+                    <p><strong>Payment Method:</strong> Credit Card</p>
+                    <p><strong>Cancellation Reason:</strong> Cancelled by customer.</p>
+                </div>
+                
+                <div class="order-products">
+                    <div class="order-product">
+                        <img src="https://placehold.co/60x60?text=Product+6" class="product-image-small" alt="Smart Watch Pro">
+                        <div class="product-info-small">
+                            <h4 class="product-title-small">Smart Watch Pro</h4>
+                            <div class="product-price-small">$249.99</div>
+                            <div class="product-quantity">Qty: 1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-footer">
+                    <div class="order-total">
+                        Total: $249.99
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Order Details</button>
+                        <button class="btn btn-primary">Buy Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Clothing</a></li>
+                        <li><a href="#">Home & Living</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shopigo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Order filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const orderItems = document.querySelectorAll('.order-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Filter orders
+                    orderItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-status') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show message if no orders match filter
+                    const visibleItems = document.querySelectorAll('.order-item[style="display: block"]');
+                    const ordersContainer = document.querySelector('.orders-container');
+                    
+                    if (visibleItems.length === 0) {
+                        if (!document.querySelector('.empty-orders')) {
+                            const emptyMessage = document.createElement('div');
+                            emptyMessage.className = 'empty-orders';
+                            emptyMessage.innerHTML = `
+                                <h3>No orders found for this filter</h3>
+                                <p>Try selecting a different filter to see your other orders.</p>
+                            `;
+                            ordersContainer.appendChild(emptyMessage);
+                        }
+                    } else {
+                        const emptyMessage = document.querySelector('.empty-orders');
+                        if (emptyMessage) {
+                            emptyMessage.remove();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
