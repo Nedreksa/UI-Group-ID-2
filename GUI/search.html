@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Shopigo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Search page additional styles */
+        .search-container {
+            display: flex;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+            }
+        }
+        
+        .filter-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .search-results {
+            flex: 1;
+        }
+        
+        .filter-group {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .filter-options {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .filter-options li {
+            margin-bottom: 10px;
+        }
+        
+        .filter-options label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .filter-options input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        .price-range {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .price-input {
+            width: 100px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .price-separator {
+            margin: 0 10px;
+        }
+        
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-results-info {
+            font-size: 16px;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+            margin-left: 15px;
+        }
+        
+        .view-option {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .view-option.active {
+            background-color: #1e88e5;
+            color: white;
+            border-color: #1e88e5;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .list-item {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .list-item-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .list-item-details {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .list-item-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .list-item-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 10px;
+        }
+        
+        .list-item-description {
+            flex: 1;
+            margin-bottom: 10px;
+        }
+        
+        .list-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .page-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .page-item.active {
+            background-color: #1e88e5;
+            color: white;
+            border-color: #1e88e5;
+        }
+        
+        .page-item:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        
+        .search-term {
+            background-color: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-term-text {
+            font-weight: 500;
+        }
+        
+        .clear-search {
+            color: #1e88e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="index.html" class="logo" id="logoLink">
+                <img src="images/logo.png" alt="Shopigo Logo">
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="What are you looking for?" value="smartphone">
+                <button type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <!-- Will be populated by JavaScript based on login status -->
+            </div>
+        </div>
+        <div class="header-container">
+            <nav class="categories-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Electronics</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Phones</a>
+                            <a href="category-electronics.html">Computers</a>
+                            <a href="category-electronics.html">Tablets</a>
+                            <a href="category-electronics.html">Headphones</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Fashion</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Women's Clothing</a>
+                            <a href="category-electronics.html">Men's Clothing</a>
+                            <a href="category-electronics.html">Children's Clothing</a>
+                            <a href="category-electronics.html">Shoes</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Books</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Fiction</a>
+                            <a href="category-electronics.html">Education</a>
+                            <a href="category-electronics.html">Children's Books</a>
+                            <a href="category-electronics.html">Academic</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Spor/Outdoor</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Sports Clothing</a>
+                            <a href="category-electronics.html">Sports Shoes</a>
+                            <a href="category-electronics.html">Fitness</a>
+                            <a href="category-electronics.html">Outdoor</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Pet Shop</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Pet Food</a>
+                            <a href="category-electronics.html">Pet Toys</a>
+                            <a href="category-electronics.html">Pet Accessories</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Health</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Vitamins</a>
+                            <a href="category-electronics.html">Medical Equipment</a>
+                            <a href="category-electronics.html">First Aid</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Home & Kitchen</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Furniture</a>
+                            <a href="category-electronics.html">Kitchen</a>
+                            <a href="category-electronics.html">Decoration</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="category-electronics.html">Toys & Games</a>
+                        <div class="dropdown-content">
+                            <a href="category-electronics.html">Educational Toys</a>
+                            <a href="category-electronics.html">Board Games</a>
+                            <a href="category-electronics.html">Puzzles</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Search Term -->
+        <div class="search-term">
+            <span class="search-term-text">Search results for "smartphone"</span>
+            <a href="#" class="clear-search">Clear Search</a>
+        </div>
+        
+        <div class="search-container">
+            <!-- Filters -->
+            <div class="filter-sidebar">
+                <div class="filter-group">
+                    <h3 class="filter-title">Categories</h3>
+                    <ul class="filter-options">
+                        <li>
+                            <label>
+                                <input type="checkbox" checked>
+                                Electronics (45)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Phones (38)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Accessories (12)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Home Appliances (7)
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="filter-group">
+                    <h3 class="filter-title">Price Range</h3>
+                    <div class="price-range">
+                        <input type="number" placeholder="Min" class="price-input">
+                        <span class="price-separator">-</span>
+                        <input type="number" placeholder="Max" class="price-input">
+                    </div>
+                    <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;">Apply</button>
+                </div>
+                
+                <div class="filter-group">
+                    <h3 class="filter-title">Brands</h3>
+                    <ul class="filter-options">
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Apple (8)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Samsung (12)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Xiaomi (10)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Huawei (6)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                Oppo (5)
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="filter-group">
+                    <h3 class="filter-title">Rating</h3>
+                    <ul class="filter-options">
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                ★★★★★ (12)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                ★★★★☆ & above (23)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                ★★★☆☆ & above (35)
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox">
+                                ★★☆☆☆ & above (42)
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Search Results -->
+            <div class="search-results">
+                <div class="search-header">
+                    <div class="search-results-info">
+                        45 results found
+                    </div>
+                    <div class="sort-options">
+                        <select class="sort-select">
+                            <option>Recommended</option>
+                            <option>Price (Low to High)</option>
+                            <option>Price (High to Low)</option>
+                            <option>Newest</option>
+                            <option>Best Selling</option>
+                            <option>Most Rated</option>
+                        </select>
+                        <div class="view-options">
+                            <button class="view-option active" data-view="grid">☰</button>
+                            <button class="view-option" data-view="list">≡</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grid View -->
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+1" class="product-image" alt="Smartphone XYZ">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone XYZ</h3>
+                            <div class="product-price">$799.99</div>
+                            <p>6.7" Screen, 128GB Storage, 48MP Camera</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="1">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+2" class="product-image" alt="Smartphone ABC">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone ABC</h3>
+                            <div class="product-price">$649.99</div>
+                            <p>6.5" Screen, 256GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="2">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+3" class="product-image" alt="Smartphone DEF">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone DEF</h3>
+                            <div class="product-price">$829.99</div>
+                            <p>6.8" Screen, 512GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="3">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+4" class="product-image" alt="Smartphone GHI">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone GHI</h3>
+                            <div class="product-price">$599.99</div>
+                            <p>6.4" Screen, 128GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="4">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+5" class="product-image" alt="Smartphone JKL">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone JKL</h3>
+                            <div class="product-price">$759.99</div>
+                            <p>6.6" Screen, 256GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="5">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+6" class="product-image" alt="Smartphone MNO">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone MNO</h3>
+                            <div class="product-price">$499.99</div>
+                            <p>6.3" Screen, 128GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="6">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+7" class="product-image" alt="Smartphone PQR">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone PQR</h3>
+                            <div class="product-price">$949.99</div>
+                            <p>6.9" Screen, 512GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="7">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://placehold.co/250x200?text=Phone+8" class="product-image" alt="Smartphone STU">
+                        <button class="favorite-btn">
+                            <img src="images/favorite.png" alt="Add to Favorites">
+                        </button>
+                        <div class="product-info">
+                            <h3 class="product-title">Smartphone STU</h3>
+                            <div class="product-price">$399.99</div>
+                            <p>6.1" Screen, 64GB Storage</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="8">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- List View (initially hidden) -->
+                <div class="product-list" style="display: none;">
+                    <div class="list-item">
+                        <img src="https://placehold.co/200x200?text=Phone+1" class="list-item-image" alt="Smartphone XYZ">
+                        <div class="list-item-details">
+                            <h3 class="list-item-title">Smartphone XYZ</h3>
+                            <div class="list-item-price">$799.99</div>
+                            <div class="list-item-description">
+                                <p>6.7" Super AMOLED display, 128GB storage, 48MP+12MP+8MP rear camera, 32MP front camera, 5000mAh battery.</p>
+                                <p>This high-performance smartphone features powerful specs and a sleek design.</p>
+                            </div>
+                            <div class="list-item-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="1">Add to Cart</button>
+                                <button class="btn btn-secondary">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-item">
+                        <img src="https://placehold.co/200x200?text=Phone+2" class="list-item-image" alt="Smartphone ABC">
+                        <div class="list-item-details">
+                            <h3 class="list-item-title">Smartphone ABC</h3>
+                            <div class="list-item-price">$649.99</div>
+                            <div class="list-item-description">
+                                <p>6.5" OLED display, 256GB storage, 64MP+16MP+8MP rear camera, 24MP front camera, 4800mAh battery.</p>
+                                <p>Advanced camera system and long battery life make this ideal for everyday use.</p>
+                            </div>
+                            <div class="list-item-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="2">Add to Cart</button>
+                                <button class="btn btn-secondary">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-item">
+                        <img src="https://placehold.co/200x200?text=Phone+3" class="list-item-image" alt="Smartphone DEF">
+                        <div class="list-item-details">
+                            <h3 class="list-item-title">Smartphone DEF</h3>
+                            <div class="list-item-price">$829.99</div>
+                            <div class="list-item-description">
+                                <p>6.8" Super AMOLED display, 512GB storage, 108MP+12MP+10MP rear camera, 40MP front camera, 5500mAh battery.</p>
+                                <p>Large screen, high storage capacity and superior camera performance.</p>
+                            </div>
+                            <div class="list-item-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="3">Add to Cart</button>
+                                <button class="btn btn-secondary">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-item">
+                        <img src="https://placehold.co/200x200?text=Phone+4" class="list-item-image" alt="Smartphone GHI">
+                        <div class="list-item-details">
+                            <h3 class="list-item-title">Smartphone GHI</h3>
+                            <div class="list-item-price">$599.99</div>
+                            <div class="list-item-description">
+                                <p>6.4" AMOLED display, 128GB storage, 48MP+8MP+5MP rear camera, 20MP front camera, 4500mAh battery.</p>
+                                <p>Compact size, impressive screen quality and powerful performance.</p>
+                            </div>
+                            <div class="list-item-actions">
+                                <button class="btn btn-primary add-to-cart" data-product-id="4">Add to Cart</button>
+                                <button class="btn btn-secondary">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="page-item">«</div>
+                    <div class="page-item active">1</div>
+                    <div class="page-item">2</div>
+                    <div class="page-item">3</div>
+                    <div class="page-item">4</div>
+                    <div class="page-item">5</div>
+                    <div class="page-item">»</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Clothing</a></li>
+                        <li><a href="#">Home & Living</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shopigo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // View switching buttons
+            const viewButtons = document.querySelectorAll('.view-option');
+            const productGrid = document.querySelector('.product-grid');
+            const productList = document.querySelector('.product-list');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const view = this.getAttribute('data-view');
+                    
+                    if (view === 'grid') {
+                        productGrid.style.display = 'grid';
+                        productList.style.display = 'none';
+                    } else {
+                        productGrid.style.display = 'none';
+                        productList.style.display = 'flex';
+                    }
+                });
+            });
+            
+            // Pagination buttons
+            const pageItems = document.querySelectorAll('.page-item');
+            pageItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Special handling for next/previous buttons
+                    if (this.textContent === '«' || this.textContent === '»') {
+                        return;
+                    }
+                    
+                    // Remove active class
+                    pageItems.forEach(page => page.classList.remove('active'));
+                    // Add active class to clicked page
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
