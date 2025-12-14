@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Shopigo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="logined-home.html" class="logo">
+                <img src="images/logo.png" alt="Shopigo Logo">
+            </a>
+            <div class="search-bar">
+                <input type="text" placeholder="What are you looking for?">
+                <button type="submit">
+                    <img src="images/search.png" alt="Search">
+                </button>
+            </div>
+            <div class="nav-links" id="navLinks">
+                </div>
+        </div>
+        <div class="header-container">
+            <nav class="categories-nav">
+                <ul>
+                    <li class="dropdown"><a href="category-electronics.html">Electronics</a></li>
+                    <li class="dropdown"><a href="category-electronics.html">Fashion</a></li>
+                    <li class="dropdown"><a href="category-electronics.html">Books</a></li>
+                    <li class="dropdown"><a href="category-electronics.html">Sports/Outdoor</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="logined-home.html">Home</a> > 
+            <a href="cart.html">Cart</a> >
+            <span>Checkout</span>
+        </div>
+
+        <h1 class="page-title">Secure Checkout</h1>
+        
+        <div class="cart-container">
+            <div class="cart-items payment-container">
+                <h3 class="cart-title">Payment Details</h3>
+                
+                <form id="paymentForm" onsubmit="handlePayment(event)">
+                    <div class="card-visual">
+                        <div class="card-chip"></div>
+                        <div class="card-logo">VISA</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Cardholder Name</label>
+                        <input type="text" id="cardName" class="form-control" placeholder="e.g. John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="cardExpiry">Expiry Date</label>
+                            <input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="cardCvv">CVV</label>
+                            <input type="password" id="cardCvv" class="form-control" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked> Save card for future purchases
+                        </label>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Items Total</span>
+                    <span>$1,149.96</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (8%)</span>
+                    <span>$92.00</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total Pay</span>
+                    <span id="checkout-total">$1,241.96</span>
+                </div>
+                <button type="submit" form="paymentForm" class="btn btn-primary btn-block checkout-button">Confirm Payment</button>
+                
+                <div class="secure-badge">
+                    🔒 SSL Secure Payment
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Shopigo. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

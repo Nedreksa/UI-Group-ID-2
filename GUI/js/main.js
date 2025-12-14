@@ -30,6 +30,36 @@ document.addEventListener('DOMContentLoaded', function() {
     quantityControls.forEach(control => {
         control.addEventListener('click', handleQuantityChange);
     });
+
+    const paymentForm = document.getElementById('paymentForm');
+    if (paymentForm) {
+        paymentForm.addEventListener('submit', handlePayment);
+        
+        // Input formatting for better UX
+        const cardNumberInput = document.getElementById('cardNumber');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, ''); 
+                value = value.replace(/(.{4})/g, '$1 ').trim(); 
+                e.target.value = value;
+            });
+        }
+        
+        const cardExpiryInput = document.getElementById('cardExpiry');
+        if (cardExpiryInput) {
+            cardExpiryInput.addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+    }
+
+
+
+
 });
 
 function handleLogin(event) {
@@ -53,12 +83,12 @@ function handleForgotPassword(event) {
 
 function handleAddToCart(event) {
     const productId = event.target.getAttribute('data-product-id');
-    alert("Ürün sepete eklendi!");
+    alert("Product added to the cart!");
 }
 
 function handleAddToWishlist(event) {
     const productId = event.target.getAttribute('data-product-id');
-    alert("Ürün istek listesine eklendi!");
+    alert("Product added to the wishlist!");
 }
 
 function handleQuantityChange(event) {
@@ -97,7 +127,28 @@ function updateCartTotals() {
     }
 }
 
-// Oturumu kapatma
+
 function logout() {
     window.location.href = "index.html";
+}
+
+function handlePayment(event) {
+    event.preventDefault(); 
+    
+   
+    const btn = document.querySelector('.checkout-button');
+    
+    if (btn) {
+        btn.textContent = "Processing...";
+        btn.disabled = true;
+    }
+    
+    setTimeout(() => {
+        alert("Payment Successful! Your order has been confirmed.");
+        
+        localStorage.removeItem('cartItems'); 
+        
+        window.location.href = "cart.html";
+        
+    }, 1500); 
 }
